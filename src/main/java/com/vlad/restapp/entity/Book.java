@@ -1,9 +1,14 @@
 package com.vlad.restapp.entity;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class Book {
 
+    @ApiModelProperty(notes = "Book's unique ID")
     private int id;
+    @ApiModelProperty(notes = "Book's title")
     private String title;
+    @ApiModelProperty(notes = "Book's author")
     private String author;
 
     public int getId() {

@@ -2,6 +2,7 @@ package com.vlad.restapp.controller;
 
 import com.vlad.restapp.entity.Book;
 import com.vlad.restapp.service.BookService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/book")
+@Api(value="bookstore", description = "Operations for managing the books in a store")
 public class BookController {
 
     private BookService bookService;
