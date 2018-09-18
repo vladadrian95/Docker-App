@@ -10,8 +10,13 @@ import java.util.List;
 @Service
 public class BookServiceImpl implements BookService {
 
+
+    private BookRepository repository;
+
     @Autowired
-    BookRepository repository;
+    public void setRepository(BookRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public void add(Book book) {

@@ -64,16 +64,15 @@ public class LocalBookRepository implements BookRepository {
     @Override
     public void delete(int id) {
 
-        if (books.containsKey(id))
-            books.remove(id);
+        books.remove(id);
+
 
     }
 
     @Override
     public List<Book> getAll() {
 
-        List<Book> allBooks = new ArrayList<>(books.values());
-        return allBooks;
+        return new ArrayList<>(books.values());
 
     }
 
