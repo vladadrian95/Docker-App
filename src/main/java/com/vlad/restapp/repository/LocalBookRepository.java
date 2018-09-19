@@ -11,7 +11,7 @@ import java.util.TreeMap;
 @Repository
 public class LocalBookRepository implements BookRepository {
 
-    private Map<Integer, Book> books;
+    private Map<Long, Book> books;
     private int id = 0;
 
     public LocalBookRepository() {
@@ -44,7 +44,7 @@ public class LocalBookRepository implements BookRepository {
     }
 
     @Override
-    public Book get(int id) {
+    public Book get(long id) {
 
         return books.get(id);
 
@@ -62,7 +62,7 @@ public class LocalBookRepository implements BookRepository {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
 
         books.remove(id);
 
