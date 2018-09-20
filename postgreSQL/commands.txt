@@ -1,0 +1,5 @@
+docker run --name postgresondocker --network postgres-network -v pgdata:/var/lib/postgresql/9.3/main -p 5432:5432 -d postgresondocker:9.3
+
+docker run -it --rm --network postgres-network postgresondocker:9.3 psql -h postgresondocker -U postgresondocker --password
+
+psql -h localhost -U postgresondocker --pasword
