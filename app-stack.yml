@@ -2,19 +2,26 @@ version: "3.4"
 
 services:
   db:
-    image: postgresondocker
+    container_name: my_db
+    image: postgres:10
     ports:
       - 5432:5432
     volumes:
-      - db-data:/var/lib/docker/volumes/pgdata
+      - db-data:/var/lib/postgresql/data
     networks:
       - backend
+    environment:
+      - POSTGRES_PASSWORD = pass
+      - POSTGRES_USER = springdb
+      - POSTGRES_DB = springdb
     deploy:
       placement:
         constraints: [node.role == manager]
 
   rest-app:
-    image: rest-app
+    build: .
+    depends_on:
+      - db
     ports:
       - 8080:8080
     networks:
