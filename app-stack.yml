@@ -1,0 +1,28 @@
+version: "3.4"
+
+services:
+  db:
+    image: postgresondocker
+    ports:
+      - 5432:5432
+    volumes:
+      - db-data:/var/lib/docker/volumes/pgdata
+    networks:
+      - backend
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+  rest-app:
+    image: rest-app
+    ports:
+      - 8080:8080
+    networks:
+      - frontend
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  db-data:
