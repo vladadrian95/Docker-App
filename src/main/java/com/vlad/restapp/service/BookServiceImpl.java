@@ -1,13 +1,13 @@
 package com.vlad.restapp.service;
 
 import com.vlad.restapp.entity.Book;
-import com.vlad.restapp.repository.BookRepository;
 import com.vlad.restapp.repository.PostgresBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -30,7 +30,8 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book get(long id) {
 
-        return repository.findById(id).get();
+        Optional<Book> book = repository.findById(id);
+        return book.orElse(null);
 
     }
 

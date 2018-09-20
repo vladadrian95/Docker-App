@@ -4,6 +4,8 @@ import com.vlad.restapp.entity.Book;
 import com.vlad.restapp.service.BookService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,10 +36,21 @@ public class BookController {
     }
 
     @ApiOperation(value = "Retrieve book based on id", response = Book.class)
-    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json")
-    public Book getBook(@PathVariable Integer id, Model model) {
+    @ApiResponses(value = {
 
-        return bookService.get(id);
+            @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 204, message = "Success but no content found")
+
+    }
+    )
+    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity getBook(@PathVariable Integer id, Model model) {
+
+        Book book = bookService.get(id);
+        if (book == null)
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+        return new ResponseEntity<>(book, HttpStatus.OK);
 
     }
 
@@ -46,15 +59,26 @@ public class BookController {
     public ResponseEntity postBook(@RequestBody Book book) {
 
         bookService.add(book);
-        return new ResponseEntity<>("Book saved successfully", HttpStatus.OK);
+        return new ResponseEntity<>("Book entry created successfully", HttpStatus.CREATED);
 
     }
 
     @ApiOperation(value = "Update existing book", response = ResponseEntity.class)
+    @ApiResponses(value = {
+
+            @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 204, message = "Success but no content found to update")
+
+    }
+    )
     @RequestMapping(value = "/put/{id}", method = RequestMethod.PUT, produces = "application/json")
     public ResponseEntity putBook(@PathVariable Integer id, @RequestBody Book book) {
 
         Book bookNew = bookService.get(id);
+
+        if (bookNew == null)
+            return new ResponseEntity<>("No content found to update", HttpStatus.NO_CONTENT);
+
         bookNew.setTitle(book.getTitle());
         bookNew.setAuthor(book.getAuthor());
         bookService.update(bookNew);
