@@ -19,13 +19,13 @@ services:
         constraints: [node.role == manager]
 
   rest-app:
-    build: .
+    image: rest-app
     depends_on:
       - db
     ports:
       - 8080:8080
     networks:
-      - frontend
+      - backend
 
 networks:
   frontend:
