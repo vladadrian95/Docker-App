@@ -1,7 +1,7 @@
 package com.vlad.restapp.service;
 
 import com.vlad.restapp.entity.Book;
-import com.vlad.restapp.repository.PostgresBookRepository;
+import com.vlad.restapp.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +13,10 @@ import java.util.Optional;
 public class BookServiceImpl implements BookService {
 
 
-    private PostgresBookRepository repository;
+    private BookRepository repository;
 
     @Autowired
-    public void setRepository(PostgresBookRepository repository) {
+    public void setRepository(BookRepository repository) {
         this.repository = repository;
     }
 

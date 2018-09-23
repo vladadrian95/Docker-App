@@ -1,15 +1,7 @@
 package com.vlad.restapp.repository;
 
 import com.vlad.restapp.entity.Book;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-
-public interface BookRepository {
-
-    void add(Book book);
-    Book get(long id);
-    void update(Book book);
-    void delete(long id);
-    List<Book> getAll();
-
+public interface BookRepository extends CrudRepository<Book, Long> {
 }
