@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "book")
 public class Book implements Serializable {
 
     private static final long serialVersionUID = -3009157732242241606L;
@@ -16,9 +17,11 @@ public class Book implements Serializable {
     private long id;
 
     @ApiModelProperty(notes = "Book's title")
+    @Column(name = "title")
     private String title;
 
     @ApiModelProperty(notes = "Book's author")
+    @Column(name = "author")
     private String author;
 
     public long getId() {
